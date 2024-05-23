@@ -31,27 +31,32 @@ const Menu = () => {
       <SectionTitle
         subHeading={"Don't Miss"}
         heading={"Today's Offered"}
+        btnName={"Order Your Favourite Food"}
       ></SectionTitle>
-      <MenuCategory items={offered}></MenuCategory>
+      <MenuCategory items={offered}  btnName={"Order Your Favourite Food"}></MenuCategory>
       <MenuCategory
         items={dessert}
-        title={"DESSERT"}
+        title={"dessert"}
         coverImg={dessertImg}
+        btnName={"Order Your Favourite Food"}
       ></MenuCategory>
       <MenuCategory
         items={pizza}
-        title={"PIZZA"}
+        title={"pizza"}
         coverImg={pizzaImg}
+        btnName={"Order Your Favourite Food"}
       ></MenuCategory>
       <MenuCategory
         items={soup}
-        title={"SOUP"}
+        title={"soup"}
         coverImg={soupImg}
+        btnName={"Order Your Favourite Food"}
       ></MenuCategory>
       <MenuCategory
         items={salad}
-        title={"SALAD"}
+        title={"salad"}
         coverImg={saladImg}
+        btnName={"Order Your Favourite Food"}
       ></MenuCategory>
     </div>
   );

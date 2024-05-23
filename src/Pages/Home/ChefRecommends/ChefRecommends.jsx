@@ -8,15 +8,10 @@ import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import RecommendsCard from "./RecommendsCard";
+import UseMenu from "../../../Hooks/UseMenu";
 
 const ChefRecommends = () => {
-  const [items, setItem] = useState([]);
-
-  useEffect(() => {
-    fetch("menu.json")
-      .then((res) => res.json())
-      .then((data) => setItem(data));
-  }, []);
+  const [menu] = UseMenu();
 
   return (
     <div>
@@ -35,7 +30,7 @@ const ChefRecommends = () => {
         modules={[Pagination]}
         className="mySwiper"
       >
-        {items.map((item) => (
+        {menu.map((item) => (
           <SwiperSlide key={item._id}>
             <RecommendsCard item={item}></RecommendsCard>
           </SwiperSlide>

@@ -4,9 +4,16 @@ import coverImg from "../../assets/shop/banner2.jpg";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import OrderTabs from "./OrderTabs";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const Order = () => {
+  const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
+  const { category } = useParams();
+  const initialIndex = categories.indexOf(category)
+  const [tabIndex, setTabIndex] = useState(initialIndex);
   const [menu] = UseMenu();
+
   const salad = menu.filter((item) => item.category === "salad");
   const dessert = menu.filter((item) => item.category === "dessert");
   const pizza = menu.filter((item) => item.category === "pizza");
@@ -17,7 +24,7 @@ const Order = () => {
       <PageCover coverImg={coverImg} title={"Order Food Now!"}></PageCover>
 
       <div className="flex justify-center items-center my-12">
-        <Tabs defaultIndex={1} onSelect={(index) => console.log(index)}>
+        <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
           <TabList>
             <Tab>Salad</Tab>
             <Tab>Pizza</Tab>

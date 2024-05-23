@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 
+import Button from "../../Shared/Button/Button";
+
 const FoodCard = ({ item }) => {
   const { name, image,price, recipe } = item;
   return (
@@ -13,9 +15,7 @@ const FoodCard = ({ item }) => {
           <h2 className="card-title text-2xl">{name}</h2>
           <p>{recipe}</p>
           <div className="card-actions">
-            <button className="btn btn-outline border-0 border-b-4  text-yellow-500 hover:bg-slate-500 hover:text-yellow-500">
-              ADD TO CARD
-            </button>
+            <Button btnName={"Add to Card"}></Button>
           </div>
         </div>
       </div>
