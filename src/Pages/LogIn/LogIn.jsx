@@ -5,15 +5,18 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const LogIn = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const {logIn} =useContext(AuthContext);
+  const from = location?.state?.from?.pathname || "/";
 
+  const { logIn } = useContext(AuthContext);
 
-  const [disable, setDisable] =useState(true)
+  const [disable, setDisable] = useState(true);
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
@@ -23,28 +26,27 @@ const LogIn = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password)
-    logIn(email, password)
-    .then(result => {
-      const user = (result.user)
-      console.log(user)
+    console.log(email, password);
+    logIn(email, password).then((result) => {
+      const user = result.user;
+      console.log(user);
       Swal.fire({
         title: "SuccessFully",
         text: "User Login SuccessFully",
-        icon: "success"
+        icon: "success",
       });
-    })
+      navigate(from, { replace: true });
+    });
   };
 
-  const handleValidateCaptcha = (e)=>{
+  const handleValidateCaptcha = (e) => {
     const user_captcha_value = e.target.value;
-    if(validateCaptcha(user_captcha_value)){
-      setDisable(false)
+    if (validateCaptcha(user_captcha_value)) {
+      setDisable(false);
+    } else {
+      setDisable(true);
     }
-    else{
-      setDisable(true)
-    }
-  }
+  };
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col">
@@ -101,10 +103,14 @@ const LogIn = () => {
               />
             </div>
             <div className="form-control mt-6">
-              <button disabled={disable} className="btn btn-primary">Login</button>
+              <button disabled={disable} className="btn btn-primary">
+                Login
+              </button>
             </div>
           </form>
-          <p>New here? <Link to="/register">Create an account</Link></p>
+          <p>
+            New here? <Link to="/register">Create an account</Link>
+          </p>
         </div>
       </div>
     </div>
