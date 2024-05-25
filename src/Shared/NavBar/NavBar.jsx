@@ -1,12 +1,34 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
-  const navLinks = <>
-      <li><NavLink to='/'>Home</NavLink></li>
-      <li><NavLink to='/menu'>Menu</NavLink></li>
-      <li><NavLink to='/order/salad'>Order Food</NavLink></li>
-  
-  </>
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        Swal.fire({
+          title: "Log out",
+          text: "Log out successfully",
+          icon: "success"
+        });
+      })
+      .catch((error) => console.error(error));
+  };
+  const navLinks = (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/menu">Menu</NavLink>
+      </li>
+      <li>
+        <NavLink to="/order/salad">Order Food</NavLink>
+      </li>
+    </>
+  );
   return (
     <div className="navbar fixed z-20 bg-black bg-opacity-30 text-white max-w-screen-xl">
       <div className="navbar-start">
@@ -37,14 +59,20 @@ const NavBar = () => {
         <a className="btn btn-ghost text-xl">daisyUI</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-         {navLinks}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
       <div className="navbar-end">
-        <Link to="/logIn">
-        <button className="btn btn-success">Log in</button>
-        </Link>
+        {user ? (
+          <Link>
+            <button onClick={handleLogOut} className="btn btn-success">
+              Log out
+            </button>
+          </Link>
+        ) : (
+          <Link to="/logIn">
+            <button className="btn btn-success">Log in</button>
+          </Link>
+        )}
       </div>
     </div>
   );
