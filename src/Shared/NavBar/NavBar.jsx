@@ -3,9 +3,12 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
+import useCard from "../../Hooks/useCard";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [card] = useCard([]);
+
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -32,7 +35,7 @@ const NavBar = () => {
         <Link>
           <button className="btn btn-sm">
           <MdOutlineAddShoppingCart />
-            <div className="badge badge-secondary">+0</div>
+            <div className="badge badge-secondary">+{card.length}</div>
           </button>
         </Link>
       </li>

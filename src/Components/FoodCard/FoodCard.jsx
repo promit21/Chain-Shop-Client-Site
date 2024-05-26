@@ -7,6 +7,7 @@ import useAuth from "../../Hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxios from "../../Hooks/useAxios";
+import useCard from "../../Hooks/useCard";
 
 const FoodCard = ({ item }) => {
   const { name, image, price, recipe, _id } = item;
@@ -14,8 +15,9 @@ const FoodCard = ({ item }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const axios =useAxios();
+  const [, refetch] =useCard();
 
-  const handleAddCard = (food) => {
+  const handleAddCard = () => {
     if (user && user.email) {
       const cardItem = {
         menuId: _id,
@@ -33,6 +35,7 @@ const FoodCard = ({ item }) => {
             showConfirmButton: false,
             timer: 1500
           });
+          refetch();
         }
       })
     } else {
@@ -64,7 +67,7 @@ const FoodCard = ({ item }) => {
         <div className="card-body items-center text-center">
           <h2 className="card-title text-2xl">{name}</h2>
           <p>{recipe}</p>
-          <div onClick={() => handleAddCard(item)} className="card-actions">
+          <div onClick={handleAddCard} className="card-actions">
             <Button btnName={"Add to Card"}></Button>
           </div>
         </div>
