@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { MdOutlineAddShoppingCart } from "react-icons/md";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -11,7 +12,7 @@ const NavBar = () => {
         Swal.fire({
           title: "Log out",
           text: "Log out successfully",
-          icon: "success"
+          icon: "success",
         });
       })
       .catch((error) => console.error(error));
@@ -26,6 +27,14 @@ const NavBar = () => {
       </li>
       <li>
         <NavLink to="/order/salad">Order Food</NavLink>
+      </li>
+      <li>
+        <Link>
+          <button className="btn btn-sm">
+          <MdOutlineAddShoppingCart />
+            <div className="badge badge-secondary">+0</div>
+          </button>
+        </Link>
       </li>
     </>
   );

@@ -13,6 +13,7 @@ const LogIn = () => {
   const location = useLocation();
 
   const from = location?.state?.from?.pathname || "/";
+  console.log(location.state)
 
   const { logIn } = useContext(AuthContext);
 
