@@ -32,7 +32,7 @@ const NavBar = () => {
         <NavLink to="/order/salad">Order Food</NavLink>
       </li>
       <li>
-        <Link>
+        <Link to="/dashboard/card">
           <button className="btn btn-sm">
           <MdOutlineAddShoppingCart />
             <div className="badge badge-secondary">+{card.length}</div>

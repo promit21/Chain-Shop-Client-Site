@@ -14,30 +14,31 @@ const FoodCard = ({ item }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const axios =useAxios();
-  const [, refetch] =useCard();
+  const axios = useAxios();
+  const [, refetch] = useCard();
 
   const handleAddCard = () => {
     if (user && user.email) {
       const cardItem = {
         menuId: _id,
         email: user.email,
-        image, price, name  
+        image,
+        price,
+        name,
       };
-      axios.post('/cards', cardItem)
-      .then(res => {
-        console.log(res.data)
-        if(res.data.insertedId){
+      axios.post("/cards", cardItem).then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
           Swal.fire({
             position: "center",
             icon: "success",
-            title:  `${name} Added Successfully`,
+            title: `${name} Added Successfully`,
             showConfirmButton: false,
-            timer: 1500
+            timer: 1500,
           });
           refetch();
         }
-      })
+      });
     } else {
       Swal.fire({
         title: "You are not logged in",
