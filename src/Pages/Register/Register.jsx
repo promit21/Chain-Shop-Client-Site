@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Register = () => {
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const {
@@ -15,26 +17,33 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data)
-    createUser(data.email, data.password)
-    .then(result =>{
+    console.log(data);
+    createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
-      console.log(loggedUser)
+      console.log(loggedUser);
       updateUserProfile(data.name, data.photoURL)
-      .then(()=>{
-        console.log("User Profile is Updated")
-        reset();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "User Profile created successfully",
-          showConfirmButton: false,
-          timer: 1500
-        });
-        navigate('/')
-      })
-      .catch(error=>console.error(error))
-    })
+        .then(() => {
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log('user Added the database')
+              reset();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User Profile created successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            }
+          });
+        })
+        .catch((error) => console.error(error));
+    });
   };
 
   return (

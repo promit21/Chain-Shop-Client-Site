@@ -7,7 +7,7 @@ import LogIn from "../Pages/LogIn/LogIn";
 import Register from "../Pages/Register/Register";
 import Dashboard from "../Layout/Dashboard";
 import Card from "../Pages/Dashboard/Card/Card";
-
+import PrivateRouter from "./PrivateRouter";
 
 export const router = createBrowserRouter([
   {
@@ -38,12 +38,16 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element:<Dashboard></Dashboard>,
+    element: (
+      <PrivateRouter>
+        <Dashboard></Dashboard>
+      </PrivateRouter>
+    ),
     children: [
       {
-        path:"card",
-        element: <Card></Card>
-      }
-    ]
-  }
+        path: "card",
+        element: <Card></Card>,
+      },
+    ],
+  },
 ]);
