@@ -4,6 +4,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import SocialLogin from "../../Components/SocialLogIn/SocialLogin";
 
 const Register = () => {
   const axiosPublic = useAxiosPublic();
@@ -125,9 +126,11 @@ const Register = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button className="btn btn-primary">Register</button>
             </div>
           </form>
+          <div className="divider"></div>
+          <SocialLogin btnName={"Sign Up with Google"}></SocialLogin>
         </div>
       </div>
     </div>

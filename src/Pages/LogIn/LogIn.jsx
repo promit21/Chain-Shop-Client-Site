@@ -7,6 +7,7 @@ import {
 import { AuthContext } from "../../Provider/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import SocialLogin from "../../Components/SocialLogIn/SocialLogin";
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -109,9 +110,11 @@ const LogIn = () => {
               </button>
             </div>
           </form>
-          <p>
-            New here? <Link to="/register">Create an account</Link>
+          <p className="text-center">
+            New here? <Link to="/register" className="text-blue-500">Create a new account</Link>
           </p>
+         
+          <SocialLogin btnName={"Continue With Google"}></SocialLogin>
         </div>
       </div>
     </div>
