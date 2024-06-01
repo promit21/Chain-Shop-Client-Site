@@ -9,6 +9,8 @@ import Dashboard from "../Layout/Dashboard";
 import Card from "../Pages/Dashboard/Card/Card";
 import PrivateRouter from "./PrivateRouter";
 import AllUser from "../Pages/Dashboard/AllUser/AllUser";
+import AddItem from "../Pages/Dashboard/AddItem/AddItem";
+import AdminRouter from "./AdminRouter";
 
 export const router = createBrowserRouter([
   {
@@ -45,14 +47,29 @@ export const router = createBrowserRouter([
       </PrivateRouter>
     ),
     children: [
+      // Normal User Route
       {
         path: "card",
         element: <Card></Card>,
       },
+
+      // Admin only Route
+      {
+        path: "addItems",
+        element: (
+          <AdminRouter>
+            <AddItem></AddItem>
+          </AdminRouter>
+        ),
+      },
       {
         path: "allUser",
-        element: <AllUser></AllUser>
-      }
+        element: (
+          <AdminRouter>
+            <AllUser></AllUser>
+          </AdminRouter>
+        ),
+      },
     ],
   },
 ]);
