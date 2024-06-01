@@ -1,3 +1,4 @@
+import SectionTitle from "../../../Components/SectionTitle/SectionTitle";
 import useCard from "../../../Hooks/useCard";
 import CardRow from "./CardRow";
 
@@ -6,6 +7,10 @@ const Card = () => {
   const totalPrice = card.reduce((total, item) => total + item.price, 0);
   return (
     <div>
+      <SectionTitle
+        heading={"WANNA ADD MORE?"}
+        subHeading={"My Card"}
+      ></SectionTitle>
       <div className="flex justify-around items-center">
         <h2 className="text-4xl">Total Orders: {card.length}</h2>
         <h2 className="text-4xl">Total Price: {totalPrice}</h2>
@@ -27,10 +32,14 @@ const Card = () => {
             </tr>
           </thead>
           <tbody>
-           {
-            card.map((item, index)=> <CardRow key={item._Id} item={item} index={index} refetch={refetch}></CardRow>)
-           }
-           
+            {card.map((item, index) => (
+              <CardRow
+                key={item._Id}
+                item={item}
+                index={index}
+                refetch={refetch}
+              ></CardRow>
+            ))}
           </tbody>
         </table>
       </div>

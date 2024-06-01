@@ -8,6 +8,7 @@ import Register from "../Pages/Register/Register";
 import Dashboard from "../Layout/Dashboard";
 import Card from "../Pages/Dashboard/Card/Card";
 import PrivateRouter from "./PrivateRouter";
+import AllUser from "../Pages/Dashboard/AllUser/AllUser";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ export const router = createBrowserRouter([
         path: "card",
         element: <Card></Card>,
       },
+      {
+        path: "allUser",
+        element: <AllUser></AllUser>
+      }
     ],
   },
 ]);
